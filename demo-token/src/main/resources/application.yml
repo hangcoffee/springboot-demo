@@ -1,0 +1,45 @@
+server:
+  port: 8080
+spring:
+#mysql
+  datasource:
+    url: jdbc:mysql://47.101.35.209:3306/test
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+#redis
+  redis:
+    database: 0
+    host: 47.101.35.209
+    port: 6379
+#kafka
+  kafka:
+    producer:
+      bootstrap-servers: 47.101.35.209:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers: 47.101.35.209:9092
+      enable-auto-commit: true      #指定消息被消费之后自动提交偏移量
+      group-id: group_hello
+      auto-offset-reset: latest     #从最近的地方开始消费
+#activemq
+  activemq:
+    broker-url: tcp://47.101.35.209:61616
+    #是否是内存模式，默认为true
+    in-memory: true
+    # 暴露pool配置
+    pool:
+      enabled: false
+    #是否接受对象数据
+    packages:
+      trust-all: true
+
+mybatis:
+  mapper-locations:
+    classpath:/mapper/**Mapper.xml
+    #打印sql
+logging:
+    level:
+      com.example.demo.mapper: DEBUG
+
